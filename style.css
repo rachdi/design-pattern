@@ -1,8 +1,18 @@
+body {
+	background-color: lightblue;
+}
 #concat{
 	text-align: center;
-	color: red;
-	font-size: xx-large;
+	color: gold;
+	font-size: 300px;
+
 }
 #button{
+	
+	font-size: 200px;
+	color: red;
+	text-align: center;
+}
+#input{
 	text-align: center;
 }

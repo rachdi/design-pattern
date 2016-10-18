@@ -1,22 +1,24 @@
 (function(){
 	countdown={
-		reset:0,
+		
 
-		timer:10,
+		timer:null,
+		s:null,
+		m:null,
 		interval:null,
 		init:function(){
 			countdown.listeners();
 		},
 		listeners:function(){
-			$("#Start").on("click",countdown.start);
-			console.log("jdn");
-			
-			$("#Stop").on("click",countdown.stop);
-			
-			$("#Reset").on("click",countdown.reset);
+			$("#Start").on("click",this.start);
+			$("#Stop").on("click",this.stop);
+			$("#Reset").on("click",this.reset);
+			$("#modifier").on("click",countdown.recupere);
+//
 			
 		},
 		start:function(){
+			console.log("hello");
 			countdown.interval=setInterval(countdown.decrement,1000);
 		},
 		
@@ -33,6 +35,21 @@
 			}
 
 		},
+		reset:function(){
+			
+				countdown.timer=100;
+			
+		},
+		recupere:function(){
+			countdown.s=parseInt($('#s').val(),10);
+			countdown.m=parseInt($('#m').val(),10);
+			countdown.afficher();
+			countdown.timer=parseInt(countdown.m,10)*60+parseInt(countdown.s,10);
+
+
+			
+		},
+		
 		
 		
 		afficher:function(){
@@ -41,7 +58,7 @@
 			$("#minutes").text(minutes);
 			$("#secondes").text(secondes);
 
-		},
+		}
 	};
 	countdown.init();
 })();
