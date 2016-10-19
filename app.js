@@ -6,46 +6,51 @@
 		s:null,
 		m:null,
 		interval:null,
+		max:null,
 		init:function(){
 			countdown.listeners();
 		},
 		listeners:function(){
-			$("#Start").on("click",this.start);
-			$("#Stop").on("click",this.stop);
-			$("#Reset").on("click",this.reset);
-			$("#modifier").on("click",countdown.recupere);
-//
+			$("#Start").on("click",this.start.bind(this));
+			$("#Stop").on("click",this.stop.bind(this));
+			$("#Reset").on("click",this.reset.bind(this));
+			$("#modifier").on("click",this.recupere.bind(this));
 			
 		},
+			
+			
+
+		
 		start:function(){
 			console.log("hello");
-			countdown.interval=setInterval(countdown.decrement,1000);
+			this.interval=setInterval(this.decrement.bind(this),1000);
 		},
 		
 		stop:function(){
 			
-			clearInterval(countdown.interval);
+			clearInterval(this.interval);
 		     
 		},
 		decrement:function(){
-			countdown.timer--;
-			countdown.afficher();
-			if (countdown.timer == 0){
-				clearInterval(countdown.interval);
+			this.timer--;
+			this.progressbar();
+			this.afficher();
+			if (this.timer == 0){
+				clearInterval(this.interval);
 			}
 
 		},
 		reset:function(){
 			
-				countdown.recupere();
+				this.recupere();
 			
 		},
 		recupere:function(){
-			countdown.s=parseInt($('#s').val(),10);
-			countdown.m=parseInt($('#m').val(),10);
-			countdown.afficher();
-			countdown.timer=parseInt(countdown.m,10)*60+parseInt(countdown.s,10);
-
+			this.s=parseInt($('#s').val(),10);
+			this.m=parseInt($('#m').val(),10);
+			this.afficher();
+			this.timer=parseInt(this.m,10)*60+parseInt(this.s,10);
+			max=this.timer;
 
 			
 		},
@@ -53,11 +58,19 @@
 		
 		
 		afficher:function(){
-			var minutes= parseInt(countdown.timer/60,10);
-			var secondes=countdown.timer-minutes*60;
+			var minutes= parseInt(this.timer/60,10);
+			var secondes=this.timer-minutes*60;
 			$("#minutes").text(minutes);
 			$("#secondes").text(secondes);
 
+		},
+		progressbar:function(){
+			var jqProgess = $("#progressbar");
+			var pourcent=this.timer*100/max;
+				console.log(pourcent);
+				jqProgess.val(pourcent);
+
+				// t.$("span")[0].innerHTML=Math.floor((100 / 70) * value);
 		}
 	};
 	countdown.init();
