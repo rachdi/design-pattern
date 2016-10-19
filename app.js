@@ -37,7 +37,7 @@
 		},
 		reset:function(){
 			
-				countdown.timer=100;
+				countdown.recupere();
 			
 		},
 		recupere:function(){
